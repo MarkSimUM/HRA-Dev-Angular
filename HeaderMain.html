@@ -1,0 +1,71 @@
+
+<div ng-controller="NavController">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">home</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li ng-class="{'active': $state.includes('home') }"><a ui-sref="home">Home</a></li>
+
+                <li ng-class="{'active': $state.includes('aboutme') }" class="dropdown">
+
+                    <a   class="dropdown-toggle" data-toggle="dropdown">Test Dropdown<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <!--<li ng-class="{ 'active': $state.includes('aboutme')   }">-->
+                        <li ui-sref-active="active" class="item"> <a ui-sref="aboutme">Dropdown 1</a></li>
+                        <li ui-sref-active="active" class="item"> <a ui-sref="resume">Dropdown 2</a></li>
+                        <!--<li class="divider"></li>-->
+                    </ul>
+
+                </li>
+
+
+                //** Add this code to HTML menu file ---->
+                <li ui-sref-active="active" class="item"> <a ui-sref="account">Account</a></li>
+                <li ui-sref-active="active" class="item"> <a ui-sref="organization">Organization</a></li>
+                <li ng-class="{'active': $state.includes('angular') }" class="dropdown">
+                          <li ui-sref-active="active" class="item"> <a ui-sref="angular">Angular Kendo</a></li>
+
+                </li>
+                <li ng-class="{'active': $state.includes('bootstrap') }" class="dropdown">
+                <li ui-sref-active="active" class="item"> <a ui-sref="bootstrap">Bootstrap Kendo</a></li>
+
+                </li>
+                <li ng-class="{'active': $state.includes('autocomplete') }" class="dropdown">
+                <li ui-sref-active="active" class="item"> <a ui-sref="autocomplete">Autocomplete Kendo</a></li>
+
+                </li>
+
+
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+
+                <li class="dropdown">
+
+                <a  class="dropdown-toggle" data-toggle="dropdown">Geek stuff <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+
+                      <li> <a ng-click="startup.debug = !startup.debug">{{ startup.debug && 'Set debug mode OFF' || 'Set debug mode ON' }}</a></li>
+                     </ul>
+                </li>
+
+
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+
+
+   </nav>  <!-- nav class -->
+
+</div>

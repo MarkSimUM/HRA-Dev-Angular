@@ -1,0 +1,183 @@
+
+
+<!--accountController as account-->
+
+
+<!--<pre>{{account | pretty}}</pre>-->
+
+<h4>Select a date</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Accounts
+            <div class="pull-right"> <button type="button" class="btn btn-default btn-xs" ng-click="account.getAccountList()">Accounts</button>
+            </div>
+        </h3>
+    </div>
+
+<div class='container-fluid'>
+
+    <h4>Select an Account</h4>
+    <!-- <pre>Model: {{account.model.gridData.options.data | json}}</pre> -->
+    <input type="text" ng-model="selected" typeahead="account as account.ACCOUNTNAME for account in ::account.model.accountList | filter:$viewValue | limitTo:8" class="form-control">
+	<br>SELECTED: {{selected}}<br>
+
+  </div>
+
+
+  
+    <!--   <div class="panel-body">
+
+
+        <table class="table table-striped">
+            <tr>
+                <th>Account Name</th>
+                <th>Account Type</th>
+                <th>Test</th>
+
+            </tr>
+
+            <tr ng-repeat="account in account.model.accountList">
+
+              
+                <td>{{account.ACCOUNTNAME}}</td>
+                <td>{{account.ACCOUNTTYPE}}</td>
+                <td>{{account.ISTEST}}</td>
+
+            </tr>
+
+        </table>
+
+    </div> --> 
+	<!-- panel body-->
+
+</div> <!-- panel -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Account Grid
+            <div class="pull-right"> <button type="button" class="btn btn-default btn-xs" ng-click="account.viewGrid()">View Grid</button>
+            </div>
+        </h3>
+    </div>
+<!-- <div ui-grid="{ data: account.model.accountList }" class="uiGrid"></div> -->
+  <div ng-show = "account.gridView" >
+  <div ui-grid="account.gridOptions" class="uiGrid"></div>
+  </div>
+
+</div>
+      <!-- <kendo-grid k-options="account.mainGridOptions" k-data-source="account.model.gridData"> -->
+   <!--     <kendo-grid k-options={pageSize:3,sortable:true,pageable:true} k-data-source="account.model.gridData">
+   -->      
+   <!-- </kendo-grid> -->
+
+     <!--NOTE: use dataItem. to specify the data in a kendo-list-view-->
+    <!-- <div class="demo-section">
+        <div kendo-list-view id="listView" k-data-source="account.accountListDS">
+            <div class="account" k-template>
+                <img ng-src="https://www.hmrc.kines.umich.edu/hra/img/icon/advscreening.gif" alt=" image" />
+                <h3>{{dataItem.ACCOUNTNAME}}</h3>
+                
+            </div>
+        </div>
+        <div kendo-pager k-data-source="account.accountListDS"></div>
+    </div>
+ -->
+<!--{{account.model.accountList | json }}-->
+ <!-- <div ng-if="startup.debug">
+
+
+      <br> acct.restRequestURL :
+      <pre>
+    {{acct.restRequestURL }}
+      </pre>
+    <br> RESPONSE DATA:
+      <pre>
+    {{acct.accountList | json}}
+      </pre>
+     <br> STATUS:
+      <pre>
+   {{acct.responseStatus}}
+      </pre>
+
+   
+ </div>
+ -->
+    <script type="text/x-kendo-angular-template" id="template">
+    </script>
+
+    <style scoped>
+        .demo-section {
+            width: 860px;
+            margin: 20px auto;
+            border: 0;
+            background: none;
+        }
+        #listView {
+            padding: 10px 5px;
+            margin-bottom: -1px;
+            min-height: 510px;
+        }
+        .account {
+            float: left;
+            position: relative;
+            width: 111px;
+            height: 170px;
+            margin: 0 5px;
+            padding: 0;
+        }
+        .account img {
+            width: 50px;
+            height: 50px;
+        }
+        .account h3 {
+            margin: 0;
+            padding: 3px 5px 0 0;
+            max-width: 96px;
+            overflow: hidden;
+            line-height: 1.1em;
+            font-size: .9em;
+            font-weight: normal;
+            text-transform: uppercase;
+            color: #999;
+        }
+        .account p {
+            visibility: hidden;
+        }
+        .account:hover p {
+            visibility: visible;
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 110px;
+            vertical-align: middle;
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0,0,0,0.75);
+            transition: background .2s linear, color .2s linear;
+            -moz-transition: background .2s linear, color .2s linear;
+            -webkit-transition: background .2s linear, color .2s linear;
+            -o-transition: background .2s linear, color .2s linear;
+        }
+        .k-listview:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>
+</div>
+
+

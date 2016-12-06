@@ -1,0 +1,148 @@
+<!-- index.html -->
+<body>
+  <div ui-view="filters"></div>
+  <div ui-view="tabledata"></div>
+  <div ui-view="graph"></div>
+</body>
+$stateProvider
+  .state('report', {
+    views: {
+      'filters': { ... templates and/or controllers ... },
+      'tabledata': {},
+      'graph': {},
+    }
+  })
+Then each view in views can set up its own templates (template, templateUrl, templateProvider) and controllers (controller, controllerProvider).
+
+$stateProvider
+  .state('report',{
+    views: {
+      'filters': {
+        templateUrl: 'report-filters.html',
+        controller: function($scope){ ... controller stuff just for filters view ... }
+      },
+      'tabledata': {
+        templateUrl: 'report-table.html',
+        controller: function($scope){ ... controller stuff just for tabledata view ... }
+      },
+      'graph': {
+        templateUrl: 'report-graph.html',
+        controller: function($scope){ ... controller stuff just for graph view ... }
+      },
+    }
+  })
+
+app.factory('xFactory', function(){
+    var dataarray = [
+            {   "item1": "value"
+               ,"item2": "value"
+            },
+            {    "item1": "value"
+                ,"item2": "value"
+            }
+         ];
+   var dataobject = {
+            "name": "value",
+            "droplist":[
+               {"data": "val1" },
+               {"data": "val2" }
+             ],
+            "jobs": {
+                  "1": {"item1": "value1"
+                        , "item2": "value2"
+                    },
+                  "2": {"item1": "value1"
+                       , "item2": "value2"
+                     },
+             }
+    };
+
+    var factory = {};
+    factory.getDataObject = function(){
+         return dataobject;
+    }
+    return factory;
+});
+
+app.controller('xController', function($scope, xFactory){
+    this.rdata = [];
+    this.rdata = xFactory.getDataObject();
+
+
+}
+
+
+Error: [$parse:syntax] Syntax Error: Token '{' is an unexpected token at column 9 of the expression
+ [collapse{{$index + 1}}=!collapse{{$index + 1}}] starting at [{{$index + 1}}=!collapse{{$index + 1}}].
+
+
+
+<div ui-slider="7"></div> <!-- in template-->
+myApp.directive('slider', function() {
+  return function(scope, element, attrs) {
+    $(element).slider({
+    	min: 0, max: 10, value: attrs.uiSlider,
+      slide: function(event, ui) { scope.slider = ui.value; scope.$apply(); },
+      create: function() { scope.slider = 5; }
+    });
+  }
+});
+
+
+<h1>Collapse</h1>
+
+<p>AngularJS Only:</p>
+<div class="accordion" id="accordion1">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" ng-class="{collapsed:!collapseOne}" ng-click="collapseOne=!collapseOne"">
+        Collapsible Group Item #1
+      </a>
+    </div>
+    <div class="accordion-body" ng-class="{collapse:collapseOne}">
+      <div class="accordion-inner">
+        Anim pariatur cliche...
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" ng-class="{collapsed:!collapseTwo}" ng-click="collapseTwo=!collapseTwo">
+        Collapsible Group Item #2
+      </a>
+    </div>
+    <div class="accordion-body" ng-class="{collapse:collapseTwo}">
+      <div class="accordion-inner">
+        Anim pariatur cliche...
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Bootstrap JS:</p>
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Collapsible Group Item #1
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        Anim pariatur cliche...
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        Collapsible Group Item #2
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Anim pariatur cliche...
+      </div>
+    </div>
+  </div>
+</div>

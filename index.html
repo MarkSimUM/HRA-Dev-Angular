@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html ng-app="HMRCDev">
+<head>
+
+    <title ng-bind="$state.current.name + ' - site name'">Title</title>
+    <!--<link rel="shortcut icon" href="/img/ms/MHeader-20140503-favicon.ico" >-->
+    <meta charset="UTF-8">
+
+     <meta name="description" content="content">							<!--Change content-->
+    <!--To ensure proper rendering and touch zooming, add the viewport meta tag to your <head>.-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">			<!--Scale a webpage to a 1:1 pixel-->
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="style/startup.css">
+
+
+    <link href="lib/kendoUI/content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="lib/kendoUI/styles/kendo.common.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="lib/kendoUI/styles/kendo.common-material.core.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/kendoUI/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/kendoUI/styles/kendo.material.min.css" />
+
+    <link href="lib/kendoUI/styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="lib/kendoUI/styles/kendo.default.min.css" rel="stylesheet">
+    <link href="lib/kendoUI/styles/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="lib/kendoUI/styles/kendo.dataviz.default.min.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//mcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+     <link rel="styleSheet" href="lib/ui-grid/ui-grid-unstable.css"/>
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
+        {
+            display: none;
+        }
+         #splash-page.ng-cloak  /*<-- This has higher specificity so it can display a splash screen*/
+        {
+            display: block;
+        }
+        [ng-cloak].splash {
+            display: block !important;
+        }
+        /* some naive styles for a splash page */
+        .splash {
+            background: blue;
+            color: white;
+        }
+        .splash h2 {
+            font-size: 2.1em;
+            font-weight: 500;
+        }
+        h2 h3  
+        {box-sizing:content-box}
+		
+		.uiGrid {
+         width: 90%;
+          height: 500px;
+         }
+    </style>
+
+</head>
+<body>
+
+<div ng-controller="StartupController as startup">
+    <div ng-show="isShow">
+        <!--Define your loading screen. refer th following links-->
+
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+        <div id="circularG">
+            <div id="circularG_1" class="circularG">
+            </div>
+            <div id="circularG_2" class="circularG">
+            </div>
+            <div id="circularG_3" class="circularG">
+            </div>
+            <div id="circularG_4" class="circularG">
+            </div>
+            <div id="circularG_5" class="circularG">
+            </div>
+            <div id="circularG_6" class="circularG">
+            </div>
+            <div id="circularG_7" class="circularG">
+            </div>
+            <div id="circularG_8" class="circularG">
+            </div>
+        </div>
+            </div>
+        </div>
+
+    </div>
+<div class="container">
+<!-- The splash screen must be first -->
+   <!--if source is file, use SINGLE QUOTES-->
+    <!--<div ng-include ="'headerMain.html'"></div> -->
+    <!--<div ng-include="headername"></div> -->
+
+    <div id="menu" style="display:block">
+        <!--Application Menu-->
+        <div  ng-switch on="$state.current.name">
+            <div ng-switch-when="reportimages"><div ng-include="'headerMain.html'"></div></div>
+            <div ng-switch-default><div ng-include="'headerMain.html'"></div></div>
+        </div>
+    </div>
+
+    <!--Main view-->
+    <div ui-view autoscroll='true' style="margin-top:0px"  >
+    </div>
+     <!--<div ng-view></div>-->
+
+    <!--Footer-->
+    <div ng-include="startup.footerfile"></div>
+
+<br>
+
+<!--<button ng-click="startup.debug = !startup.debug">Debug</button>-->
+<div ng-cloak>
+<div ng-if="startup.debug">
+
+    <button  type="button" class="btn btn-warning" ng-click="startup.viewstate = !startup.viewstate">{{ startup.viewstate && 'Set view state OFF' || 'Set view state ON' }}</button>
+
+    <div ng-if="startup.viewstate">
+    <hr>
+        <p>The following are some AngularJS "state" variables used for routing:</p>
+        <pre>
+          <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
+
+          $state.current.name = <span ng-bind = '$state.current.name'></span>
+          $state.url.source = <span ng-bind = '$state.$current.url.source'></span>
+          $state.templateUrl [View] = <span ng-bind = '$state.$current.templateUrl'></span>
+          $state.controller = <span ng-bind = '$state.$current.controller'></span>
+          $stateParams = <span ng-bind = '$stateParams'></span>
+          <!-- $state.$current is not a public api, we are using it to
+               display the full url for learning purposes-->
+         </pre>
+
+
+    </div>
+
+</div><!--startup.debug-->
+
+
+
+
+</div> <!--StartupController as startup-->
+</div>
+
+
+   </div> <!--  startup controller-->
+
+<script src="lib/kendoUI/js/jquery.min.js"></script>
+
+
+<!--Bootstrap JS  (MUST COME AFTER jQUERY!)  needed for dropdown mobile menu!! -->
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!--<script src="js/angular.min.js"></script>-->
+
+<!--!!! New for 1.3 ngMessages !!!-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-messages.min.js"></script>
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-route.min.js"></script>-->
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-cookies.min.js"></script>-->
+
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-animate.min.js"></script>-->
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-resource.min.js"></script>-->
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-sanitize.min.js"></script>-->
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-touch.min.js"></script>-->
+
+<!--Angular UI-->
+<!-- UI Router  v0.2.12 UPDATED-->
+<script type="text/javascript" src="lib/angular-ui-router.min.js"></script>
+
+<!-- UI Utils  0.1.1  6/14/2014   (includes jQuery Passthrough)-->
+<!--<script type="text/javascript" src="lib/ui-utils-0.1.1/ui-utils.js"></script>-->
+
+<!--UI GRID 2/17/2015 BETA-->
+
+<script src="lib/ui-grid/ui-grid-unstable.js"></script>
+
+<!--????-->
+<script type="text/javascript" src="lib/ui-utils-0.1.1/ui-utils.min.js"></script>
+<!-- UI Bootstrap  0.11.0 6/14/2014-->
+<script type="text/javascript" src="lib/ui-bootstrap-tpls-0.12.0.min.js"></script>
+
+
+<script src="lib/kendoUI/js/kendo.all.min.js"></script>
+<script src="lib/kendoUI/content/shared/js/console.js"></script>
+
+
+
+<!--APPLICATION-->
+<script type="text/javascript" src="jsApp/app.js"></script>
+<script type="text/javascript" src="jsApp/appStates.js"></script>
+<script type="text/javascript" src="jsApp/Services.js"></script>
+<script type="text/javascript" src="jsApp/directives.js"></script>
+
+
+
+<script>
+//    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+//        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+//            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+//    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+   // enter UA code:
+   // ga('create', 'UA-48303577-1', 'cytanium.com');
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+ <script type="text/javascript" src="angular-1.2/angular-animate.js"></script>
+    <script type="text/javascript">
+      //replace this with whatever your module ends up being
+      var myApp = angular.module('MyApp', ['ngAnimate']);
+    </script>
+ http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/2.0/animate.min.css">
+
+  ng-animate Directive NO LONGER USED
+
+     The show and hide animation events are gone. To get this to work with 1.2, just make an if statement to check for the removal and addition of the hide class (look at the code above to see this in action).
+
+     To hide and show an element, just do $animate.addClass('ng-hide')
+     and $animate.removeClass('ng-hide') and to perform a custom animation
+     just run $animate.addClass('some-animation').
+     Also, you don't need to "construct" animate object anymore--just use $animate directly.
+
+
+Directives that add CSS classes
+
+Event	Staring CSS Class	Ending CSS class	Directives that fire it
+enter	.ng-enter	.ng-enter-active	ngRepeat, ngInclude, ngIf, ngView
+leave	.ng-leave	.ng-leave-active	ngRepeat, ngInclude, ngIf, ngView
+move	.ng-move	.ng-move-active	ngRepeat
+
+
+In addition, ngAnimate also supports CSS-based animations which follow a similar naming convention. Here's a breakdown of that:
+
+Action	Staring CSS Class	Ending CSS class	Directives that fire it
+hide an element	.ng-hide-add	.ng-hide-add-active	ngShow, ngHide
+show an element	.ng-hide-remove	.ng-hide-remove-active	ngShow, ngHide
+adding a class to an element	.CLASS-add	.CLASS-add-active	ngClass and class=""
+removing a class from an element	.CLASS-remove	.CLASS-remove-active	ngClass and class=""
+
+  Animating ngInclude, ngView and ngIf
+
+   ngInclude, ngView and ngIf animations:
+   enter for when the new content is to be animated in.
+   leave for when the former content is to be animated out.
+  Much like ngRepeat, each of these directive trigger the enter and leave animation events when content is injected and removed from the container element. When old content is removed and new content is added then both sets of content will appear on the page if an animation is present and this allows for some cool animations to take place. Keep in mind that, while the template may be cached, the new element that is entered into the page is always a new instance of that element.
+
+
+     EXAMPLE:
+
+     <div ng-init="on=true">
+       <button ng-click="on=!on">Toggle On/Off</button>
+       <div class="my-special-animation" ng-if="on">
+         This content will enter and leave
+       </div>
+     </div>

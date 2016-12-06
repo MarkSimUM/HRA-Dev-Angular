@@ -1,0 +1,218 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-animate.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+<link rel="stylesheet" type="text/css" href="animations.css" />
+
+Example of getting json data into variable "mydata1":
+ app.controller('CtrlTest', function($scope, datatest) {
+
+     this.name ='CtrlTest Name' ;
+     this.mydata1 =
+     datatest.get(function(data){
+     });
+   ***HTML:
+ <div ng-controller="CtrlTest as test1">
+  <div ng-repeat="job in test1.mydata1.jobs">
+          <div >{{job.Dates}}</div>
+  </div>
+  </div>
+
+
+ *** DECLARING app as Variable
+     var app = angular.module( 'app', []);
+
+  *** ADDING Controller to app
+      app.controller( 'CtrlA', function() {
+
+        this.var1 = 'Var1 value';
+        this.items = ['a','b','c','d','e','f'];
+        this.chosenItem = '';
+        this.alertme = function()
+         {alert("alert me"+this.currentitem(1))};
+        this.currentitem = function(i){
+          return 'after'+this.items[i];
+        };
+      });
+*** in HTML
+
+    <div ng-controller="CtrlA as myctrl">
+         <input type='text' ng-model="myctrl.var1" size="80"/>
+         <button ng-click="myctrl.alertme()">Alert me</button>
+
+
+**** Script.js:   (using routeProvider)
+
+angular.module('ngViewExample', ['ngRoute', 'ngAnimate'],
+  function($routeProvider, $locationProvider) {
+    $routeProvider.when('/Book/:bookId', {
+      templateUrl: 'book.html',
+      controller: BookCntl,
+      controllerAs: 'book'
+    });
+    $routeProvider.when('/Book/:bookId/ch/:chapterId', {
+      templateUrl: 'chapter.html',
+      controller: ChapterCntl,
+      controllerAs: 'chapter'
+    });
+
+    // configure html5 to get links working on jsfiddle
+    $locationProvider.html5Mode(true);
+});
+
+function MainCntl($route, $routeParams, $location) {
+  this.$route = $route;
+  this.$location = $location;
+  this.$routeParams = $routeParams;
+}
+
+function BookCntl($routeParams) {
+  this.name = "BookCntl";
+  this.params = $routeParams;
+}
+
+function ChapterCntl($routeParams) {
+  this.name = "ChapterCntl";
+  this.params = $routeParams;
+}
+
+index.html:
+
+
+<div ng-controller="MainCntl as main">
+  Choose:
+  <a href="Book/Moby">Moby</a> |
+  <a href="Book/Moby/ch/1">Moby: Ch1</a> |
+  <a href="Book/Gatsby">Gatsby</a> |
+  <a href="Book/Gatsby/ch/4?key=value">Gatsby: Ch4</a> |
+  <a href="Book/Scarlet">Scarlet Letter</a><br/>
+
+  <div class="view-animate-container">
+    <div ng-view class="view-animate"></div>
+  </div>
+  <hr />
+
+  <pre>$location.path() = {{main.$location.path()}}</pre>
+  <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
+  <pre>$route.current.params = {{main.$route.current.params}}</pre>
+  <pre>$route.current.scope.name = {{main.$route.current.scope.name}}</pre>
+  <pre>$routeParams = {{main.$routeParams}}</pre>
+</div>
+
+book.html:
+
+<div>
+  controller: {{book.name}}<br />
+  Book Id: {{book.params.bookId}}<br />
+</div>
+
+
+Animations.css
+
+.view-animate-container {
+  position:relative;
+  height:100px!important;
+  position:relative;
+  background:white;
+  border:1px solid black;
+  height:40px;
+  overflow:hidden;
+}
+
+.view-animate {
+  padding:10px;
+}
+
+.view-animate.ng-enter, .view-animate.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+
+  display:block;
+  width:100%;
+  border-left:1px solid black;
+
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:10px;
+}
+
+.view-animate.ng-enter {
+  left:100%;
+}
+.view-animate.ng-enter.ng-enter-active {
+  left:0;
+}
+.view-animate.ng-leave.ng-leave-active {
+  left:-100%;
+}
+
+
+
+UI-ROUTER
+
+
+
+ There are three main ways to activate a state:
+
+ Call $state.go(). High-level convenience method. Learn More
+ Click a link containing the ui-sref directive. Learn More
+ Navigate to the url associated with the state. Learn More.
+
+If you'd like your <ui-view> to have some default content before its populated by a state activation, you can do that as well. The contents will be replaced as soon as a state is activated and populates the ui-view with a template.
+<body>
+    <ui-view>
+        <i>Some content will load here!</i>
+    </ui-view>
+</body>
+Instead of writing the template inline you can load a partial.
+
+This is probably how you'll set templates most of the time.
+
+$stateProvider.state('contacts', {
+  templateUrl: 'contacts.html'
+})
+Or if you already have a controller defined on the module, like this:
+
+$stateProvider.state('contacts', {
+  template: ...,
+  controller: 'ContactsCtrl'
+})
+Or use controllerAs syntax if preferred:
+
+$stateProvider.state('contacts', {
+  template: ...,
+  controller: 'ContactsCtrl as contact'
+})
+
+
+
+Attach Custom Data to State Objects
+
+You can attach custom data to the state object (we recommend using a data property to avoid conflicts).
+
+// Example shows an object-based state and a string-based state
+var contacts = {
+    name: 'contacts',
+    templateUrl: 'contacts.html',
+    data: {
+        customData1: 5,
+        customData2: "blue"
+    }
+}
+$stateProvider
+  .state(contacts)
+  .state('contacts.list', {
+    templateUrl: 'contacts.list.html',
+    data: {
+        customData1: 44,
+        customData2: "red"
+    }
+  })
+With the above example states you could access the data like this:
+function Ctrl($state){
+    console.log($state.current.data.customData1) // outputs 5;
+    console.log($state.current.data.customData2) // outputs "blue";
+}

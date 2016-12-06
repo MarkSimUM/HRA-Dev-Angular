@@ -1,0 +1,52 @@
+<div ng-controller="MainController">
+    {{testVar}}
+</div>
+<div class="page-header">
+    <h1>HMRCDev Demo  <small>Beta version</small></h1>
+
+
+<!--<br>nv.formInputTypes["text"]: {{nv.formInputTypes["text"]}}-->
+<!--Note: this format does not work in ng-options-->
+<!--<div ng-repeat="type in nv.formInputTypes">-->
+    <!--{{type.type}}-->
+
+<!--</div>-->
+
+
+<br>
+
+
+ <div ng-if="startup.debug">
+
+ <button  type="button" class="btn btn-warning" ng-click="nv.viewdebug = !nv.viewdebug">{{ nv.viewdebug && 'Set view page debug OFF' || 'Set view page debug ON' }}</button>
+
+  <div ng-if="nv.viewdebug">
+
+      <br> MESSAGE:
+      <pre>
+    {{message}}
+      </pre>
+    <br> RESPONSE DATA:
+      <pre>
+    {{responseData}}
+      </pre>
+     <br> STATUS:
+      <pre>
+   {{responseStatus}}
+      </pre>
+
+     <br> CONFIG:
+      <pre>
+    {{responseConfig}}
+      </pre>
+      <br> HEADERS:
+      <pre>
+    {{responseHeaders}}
+      </pre>
+
+ </div>
+ </div>
+
+</div>
+
+

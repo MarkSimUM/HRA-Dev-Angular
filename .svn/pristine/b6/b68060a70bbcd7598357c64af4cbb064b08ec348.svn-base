@@ -1,0 +1,36 @@
+
+ ng-if="showFrom(message)">
+ $state.includes('devresources')
+
+ <ANY ng-switch="expression">
+ <ANY ng-switch-when="matchValue1">...</ANY>
+ <ANY ng-switch-when="matchValue2">...</ANY>
+ <ANY ng-switch-default>...</ANY>
+ </ANY>
+ <button class="btn" id="btn" ng-click="clicked ='CZ'">CZ</button>
+    <button class="btn" id="btn" ng-click="clicked ='USA'">USA</button>
+    <hr>
+    <div ng-switch="clicked">
+        <div ng-switch-when="CZ">
+            <div class="well well-large">Some content CZ</div>
+        </div>
+        <hr>
+        <div ng-switch-when="USA">
+            <div class="well well-large">Some content USA</div>
+        </div>
+    </div>
+ <p> another example [type "this" or another value...]</p>
+ <input ng-model="selection.chosenItem" ng-init="selection.chosenItem = 'this'" /><br/>
+ <span ng-if="selection.chosenItem == 'this'"> if selection.chosenItem == this, show: {{selection.chosenItem}}</span>
+ <br><span ng-hide="selection.chosenItem == 'this'"> if 'this', hide.  Otherwise, show selection: {{selection.chosenItem}}</span>
+
+  <div ng-switch="selection.chosenItem">
+         <div ng-switch-when="this">
+             <div class="well well-large">Some content when selection.chosenItem = 'this'</div>
+         </div>
+         <hr>
+         <div ng-switch-when="USA">
+             <div class="well well-large">Some content USA</div>
+         </div>
+          <div class="animate-switch" ng-switch-default>default for chosenItem</div>
+     </div>
